@@ -113,11 +113,44 @@ class SingleLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || this.length < index) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    const prevNode = this.get(index - 1);
+    const removeNove = prevNode.next;
+
+    prevNode.next = removeNove.next;
+
+    this.length--;
+
+    return removeNove;
+  }
+  reverse() {
+    let currentNode = this.head;
+
+    this.head = this.tail;
+    this.tail = currentNode;
+
+    let nextNode;
+    let prevNode = null;
+
+    for (let i = 0; i < this.length; i++) {
+      nextNode = currentNode.next;
+      currentNode.next = prevNode;
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    return this;
+  }
 }
 
 const list = new SingleLinkedList();
 
-list.push(100);
-list.push(200);
-list.push(300);
-list.push(400);
+list.push(13);
+list.push(27);
+list.push(32);
+list.push(71);
