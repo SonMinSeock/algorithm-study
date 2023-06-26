@@ -93,4 +93,31 @@ class SingleLinkedList {
       return true;
     }
   }
+
+  insert(index, value) {
+    if (index < 0 || this.length < index) return false;
+
+    if (index === this.length) return !!this.push(value);
+
+    if (index === 0) return !!this.unshift(value);
+
+    const newNode = new Node(value);
+
+    const prevNode = this.get(index - 1);
+    const tempNode = prevNode.next;
+
+    prevNode.next = newNode;
+
+    newNode.next = tempNode;
+
+    this.length++;
+    return true;
+  }
 }
+
+const list = new SingleLinkedList();
+
+list.push(100);
+list.push(200);
+list.push(300);
+list.push(400);
