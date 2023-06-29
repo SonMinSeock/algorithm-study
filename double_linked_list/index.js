@@ -36,6 +36,7 @@ class DoubleLinkedList {
       } else {
         this.tail = removeNode.prev;
         this.tail.next = null;
+        removeNode.prev = null;
       }
       this.length--;
       return removeNode;
