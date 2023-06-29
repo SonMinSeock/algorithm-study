@@ -25,6 +25,22 @@ class DoubleLinkedList {
     this.length++;
     return this;
   }
+  pop() {
+    if (!this.head) {
+      return undefined;
+    } else {
+      let removeNode = this.tail;
+      if (this.length === 1) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        this.tail = removeNode.prev;
+        this.tail.next = null;
+      }
+      this.length--;
+      return removeNode;
+    }
+  }
 }
 
 const doubleLinkedList = new DoubleLinkedList();
