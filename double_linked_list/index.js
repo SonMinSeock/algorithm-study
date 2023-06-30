@@ -96,6 +96,15 @@ class DoubleLinkedList {
     }
     return foundNode;
   }
+
+  set(index, val) {
+    const foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 const doubleLinkedList = new DoubleLinkedList();
