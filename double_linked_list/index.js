@@ -74,6 +74,35 @@ class DoubleLinkedList {
     this.length++;
     return this;
   }
+  get(index) {
+    const listHalfLength = Math.floor(this.length / 2);
+
+    if (index < 0 || index >= this.length) return null;
+
+    if (index <= listHalfLength) {
+      let count = 0;
+      let foundNode = this.head;
+      while (count !== index) {
+        foundNode = foundNode.next;
+        count++;
+      }
+      return foundNode;
+    } else {
+      let count = this.length - 1;
+      let foundNode = this.tail;
+      while (count !== index) {
+        foundNode = foundNode.prev;
+        count--;
+      }
+      return foundNode;
+    }
+  }
 }
 
 const doubleLinkedList = new DoubleLinkedList();
+
+doubleLinkedList.push(100);
+doubleLinkedList.push(200);
+doubleLinkedList.push(300);
+doubleLinkedList.push(400);
+doubleLinkedList.push(500);
