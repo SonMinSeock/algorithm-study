@@ -76,26 +76,25 @@ class DoubleLinkedList {
   }
   get(index) {
     const listHalfLength = Math.floor(this.length / 2);
-
+    let count, foundNode;
     if (index < 0 || index >= this.length) return null;
 
     if (index <= listHalfLength) {
-      let count = 0;
-      let foundNode = this.head;
+      count = 0;
+      foundNode = this.head;
       while (count !== index) {
         foundNode = foundNode.next;
         count++;
       }
-      return foundNode;
     } else {
-      let count = this.length - 1;
-      let foundNode = this.tail;
+      count = this.length - 1;
+      foundNode = this.tail;
       while (count !== index) {
         foundNode = foundNode.prev;
         count--;
       }
-      return foundNode;
     }
+    return foundNode;
   }
 }
 
