@@ -122,6 +122,26 @@ class DoubleLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    const removeNode = this.get(index);
+    const prevNode = removeNode.prev;
+    const nextNode = removeNode.next;
+
+    prevNode.next = nextNode;
+    nextNode.prev = prevNode;
+
+    removeNode.next = null;
+    removeNode.prev = null;
+
+    this.length--;
+
+    return removeNode;
+  }
 }
 
 const doubleLinkedList = new DoubleLinkedList();
