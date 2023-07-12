@@ -10,12 +10,37 @@ class BinarySearchTree {
   constructor() {
     this.root = null;
   }
+  insert(value) {
+    const insertNode = new Node(value);
+
+    if (this.root === null) {
+      this.root = insertNode;
+      return this;
+    }
+
+    let currentNode = this.root;
+
+    while (true) {
+      if (value < currentNode.value) {
+        if (currentNode.left === null) {
+          currentNode.left = insertNode;
+          return this;
+        } else {
+          currentNode = currentNode.left;
+        }
+      } else {
+        if (currentNode.right === null) {
+          currentNode.right = insertNode;
+          return this;
+        } else {
+          currentNode = currentNode.right;
+        }
+      }
+    }
+  }
 }
 
 const tree = new BinarySearchTree();
-tree.root = new Node(10);
-tree.root.left = new Node(6);
-tree.root.right = new Node(15);
-tree.root.left.left = new Node(3);
-tree.root.left.right = new Node(8);
-tree.root.right = new Node(20);
+console.log(tree.insert(10));
+console.log(tree.insert(6));
+console.log(tree.insert(8));
