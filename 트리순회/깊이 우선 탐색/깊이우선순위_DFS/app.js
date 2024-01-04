@@ -89,7 +89,7 @@ class BinarySearchTree {
   }
   // DFS - 전위 순회
   DFSPreOrder() {
-    let current = this.root;
+    const current = this.root;
     const data = [];
 
     function traverse(node) {
@@ -108,7 +108,7 @@ class BinarySearchTree {
   }
   // DFS - 후위 순회
   DFSPostOrder() {
-    let current = this.root;
+    const current = this.root;
     const data = [];
 
     function traverse(node) {
@@ -123,6 +123,33 @@ class BinarySearchTree {
 
     traverse(current);
 
+    return data;
+  }
+  // DFS - 중위 순회
+  DFSInOrder() {
+    const current = this.root;
+    const data = [];
+
+    function traverse(node) {
+      // 1. 조건문 이용.
+      /*
+      if (node.left) {
+        traverse(node.left);
+      }
+
+      data.push(node.value);
+
+      if (node.right) {
+        traverse(node.right);
+      }
+      */
+      // 2. 논리 연산자 이용.
+      node.left && traverse(node.left);
+      data.push(node.value);
+      node.right && traverse(node.right);
+    }
+
+    traverse(current);
     return data;
   }
 }
