@@ -1,27 +1,72 @@
 class MaxBinaryHeap {
   constructor() {
-    this.valuse = [];
+    this.values = [];
   }
 
   insert(element) {
-    this.valuse.push(element);
+    this.values.push(element);
     this.bubbleUp();
   }
 
   bubbleUp() {
-    let idx = this.valuse.length - 1;
-    const element = this.valuse[idx];
+    let idx = this.values.length - 1;
+    const element = this.values[idx];
 
     while (idx > 0) {
       let parentIdx = Math.floor((idx - 1) / 2);
-      let parent = this.valuse[parentIdx];
+      let parent = this.values[parentIdx];
 
       if (element <= parent) break;
 
-      this.valuse[parentIdx] = element;
-      this.valuse[idx] = parent;
+      this.values[parentIdx] = element;
+      this.values[idx] = parent;
 
       idx = parentIdx;
+    }
+  }
+
+  extractMax() {
+    const max = this.values[0];
+    const end = this.values.pop();
+
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      // sink down...
+      this.sinkDown();
+    }
+
+    return max;
+  }
+
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
+
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swapIdx = null;
+
+      if (leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild > element) {
+          swapIdx = leftChildIdx;
+        }
+      }
+
+      if (rightChildIdx < length) {
+        rightChild = this.values[rightChildIdx];
+        if ((swapIdx === null && rightChild > element) || (swapIdx !== null && rightChild > leftChild)) {
+          swapIdx = rightChildIdx;
+        }
+      }
+
+      if (swapIdx === null) break;
+      this.values[idx] = this.values[swapIdx];
+      this.values[swapIdx] = element;
+      idx = swapIdx;
     }
   }
 }
@@ -36,4 +81,5 @@ heap.insert(27);
 heap.insert(12);
 heap.insert(55);
 
-console.log(heap.valuse);
+console.log(heap.values);
+console.log(heap.extractMax());
