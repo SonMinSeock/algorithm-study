@@ -59,10 +59,42 @@ class HashTable {
     }
     return undefined;
   }
+
+  keys() {
+    const results = [];
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!results.includes(this.keyMap[i][j][0])) {
+            results.push(this.keyMap[i][j][0]);
+          }
+        }
+      }
+    }
+
+    return results;
+  }
+
+  values() {
+    const results = [];
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!results.includes(this.keyMap[i][j][1])) {
+            results.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+    }
+
+    return results;
+  }
 }
 
 const hashMap = new HashTable();
 hashMap.set("pink", "#FFC0CB");
 hashMap.set("cyan", "#00FFFF");
-console.log(hashMap);
 console.log(hashMap.get("cyan"));
+hashMap.keys();
